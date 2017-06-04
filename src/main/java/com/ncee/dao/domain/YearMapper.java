@@ -1,6 +1,6 @@
 package com.ncee.dao.domain;
 
-import com.ncee.dao.model.Book;
+import com.ncee.dao.model.Year;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -10,55 +10,52 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.type.JdbcType;
 
-public interface BookMapper {
+public interface YearMapper {
     @Delete({
-        "delete from book",
+        "delete from year",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
     @Insert({
-        "insert into book (id, course_id, ",
-        "book, active)",
-        "values (#{id,jdbcType=BIGINT}, #{courseId,jdbcType=BIGINT}, ",
-        "#{book,jdbcType=VARCHAR}, #{active,jdbcType=INTEGER})"
+        "insert into year (id, year, ",
+        "active)",
+        "values (#{id,jdbcType=BIGINT}, #{year,jdbcType=VARCHAR}, ",
+        "#{active,jdbcType=INTEGER})"
     })
-    int insert(Book record);
+    int insert(Year record);
 
     @Select({
         "select",
-        "id, course_id, book, active",
-        "from book",
+        "id, year, active",
+        "from year",
         "where id = #{id,jdbcType=BIGINT}"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="course_id", property="courseId", jdbcType=JdbcType.BIGINT),
-        @Result(column="book", property="book", jdbcType=JdbcType.VARCHAR),
+        @Result(column="year", property="year", jdbcType=JdbcType.VARCHAR),
         @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
     })
-    Book selectByPrimaryKey(Long id);
+    Year selectByPrimaryKey(Long id);
 
     @Select({
         "select",
-        "id, course_id, book, active",
-        "from book",
+        "id, year, active",
+        "from year",
         "order by id desc"
     })
     @Results({
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="course_id", property="courseId", jdbcType=JdbcType.BIGINT),
-        @Result(column="book", property="book", jdbcType=JdbcType.VARCHAR),
+        @Result(column="year", property="year", jdbcType=JdbcType.VARCHAR),
         @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
     })
-    List<Book> selectAll();
+    List<Year> selectAll();
 
     @Update({
-        "update book",
-        "set course_id = #{courseId,jdbcType=BIGINT},",
-          "book = #{book,jdbcType=VARCHAR},",
+        "update year",
+        "set year = #{year,jdbcType=VARCHAR},",
           "active = #{active,jdbcType=INTEGER}",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    int updateByPrimaryKey(Book record);
+    int updateByPrimaryKey(Year record);
 }

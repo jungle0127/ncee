@@ -27,13 +27,88 @@
 			<property name="enableSubPackages" value="true"></property>
 		</javaClientGenerator>
 		<!-- related table and classese -->
-		<table schema="ncee" tableName="book" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-			<property name="selectAllOrderByClause" value="id desc"/>
-		</table>
 		<table schema="ncee" tableName="user_role" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
 			<property name="selectAllOrderByClause" value="id desc"/>
 		</table>
 		<table schema="ncee" tableName="users" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="rights" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="province" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="check_type" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="construct_type" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="score" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="year" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="difficulty_type" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="exam_type" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="course" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="book" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="knowledge_level" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="knowledge_module" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="knowledge" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="knowledge_info" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="question_type" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="question_image" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="question" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+			<columnOverride column="answer" javaType="java.lang.String" jdbcType="VARCHAR">
+			</columnOverride>
+		</table>
+		<table schema="ncee" tableName="question_selection" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="question_has_check_type" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="subquestion" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="question_has_knowledge" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="question_has_image" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="question_metadata" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<!-- View of database -->
+		<table schema="ncee" tableName="V_question_basic_info" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+			<property name="selectAllOrderByClause" value="id desc"/>
+		</table>
+		<table schema="ncee" tableName="V_question_full_info" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
 			<property name="selectAllOrderByClause" value="id desc"/>
 		</table>
 	</context>
