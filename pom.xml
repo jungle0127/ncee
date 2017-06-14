@@ -25,40 +25,10 @@
 	<dependencies>
 		<!-- Unit Test -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-		    <groupId>org.unitils</groupId>
-		    <artifactId>unitils-core</artifactId>
-		    <version>${unitils.version}</version>
-		    <scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.unitils</groupId>
 			<artifactId>unitils-test</artifactId>
 			<version>${unitils.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.unitils</groupId>
-			<artifactId>unitils-easymock</artifactId>
-			<version>${unitils.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.unitils</groupId>
-			<artifactId>unitils-mock</artifactId>
-			<version>${unitils.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.unitils</groupId>
-			<artifactId>unitils-inject</artifactId>
-			<version>${unitils.version}</version>
-			<scope>test</scope>			
 		</dependency>
 		
 		<!-- Log -->
