@@ -1,14 +1,11 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.UserRole;
-import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.type.JdbcType;
 
 public interface UserRoleMapper {
     @Delete({
@@ -25,31 +22,18 @@ public interface UserRoleMapper {
     })
     int insert(UserRole record);
 
+    int insertSelective(UserRole record);
+
     @Select({
         "select",
         "id, role_name, active",
         "from user_role",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="role_name", property="roleName", jdbcType=JdbcType.VARCHAR),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
+    @ResultMap("com.ncee.dao.domain.UserRoleMapper.BaseResultMap")
     UserRole selectByPrimaryKey(Long id);
 
-    @Select({
-        "select",
-        "id, role_name, active",
-        "from user_role",
-        "order by id desc"
-    })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="role_name", property="roleName", jdbcType=JdbcType.VARCHAR),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
-    List<UserRole> selectAll();
+    int updateByPrimaryKeySelective(UserRole record);
 
     @Update({
         "update user_role",

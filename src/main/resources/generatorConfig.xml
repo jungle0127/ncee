@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-	<classPathEntry location="H:\\MavenRepository\\mysql\\mysql-connector-java\\5.1.42\\mysql-connector-java-5.1.42.jar"/>
-	<context id="ncee" targetRuntime="MyBatis3Simple">
+	<classPathEntry location="C:\\Workspace\\Software\\MavenRepository\\mysql\\mysql-connector-java\\5.1.42\\mysql-connector-java-5.1.42.jar"/>
+	<context id="ncee" targetRuntime="MyBatis3">
 		<commentGenerator>
 			<property name="suppressDate" value="true"/>
 			<property name="suppressAllComments" value="true"/>
@@ -23,7 +23,7 @@
 			<property name="enableSubPackages" value="true"></property>
 		</sqlMapGenerator>
 		<!--  Location of DAO classes -->
-		<javaClientGenerator targetPackage="com.ncee.dao.domain" targetProject="C:\\Users\\Jerry\\git\\ncee\\src\\main\\java" type="ANNOTATEDMAPPER">
+		<javaClientGenerator targetPackage="com.ncee.dao.domain" targetProject="C:\\Users\\Jerry\\git\\ncee\\src\\main\\java" type="MIXEDMAPPER">
 			<property name="enableSubPackages" value="true"></property>
 		</javaClientGenerator>
 		<!-- related table and classese -->

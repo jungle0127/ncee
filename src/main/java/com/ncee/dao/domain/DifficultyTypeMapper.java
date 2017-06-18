@@ -1,14 +1,11 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.DifficultyType;
-import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.type.JdbcType;
 
 public interface DifficultyTypeMapper {
     @Delete({
@@ -25,31 +22,18 @@ public interface DifficultyTypeMapper {
     })
     int insert(DifficultyType record);
 
+    int insertSelective(DifficultyType record);
+
     @Select({
         "select",
         "id, type, active",
         "from difficulty_type",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
+    @ResultMap("com.ncee.dao.domain.DifficultyTypeMapper.BaseResultMap")
     DifficultyType selectByPrimaryKey(Long id);
 
-    @Select({
-        "select",
-        "id, type, active",
-        "from difficulty_type",
-        "order by id desc"
-    })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
-    List<DifficultyType> selectAll();
+    int updateByPrimaryKeySelective(DifficultyType record);
 
     @Update({
         "update difficulty_type",

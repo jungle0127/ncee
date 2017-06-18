@@ -1,14 +1,11 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.Users;
-import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.type.JdbcType;
 
 public interface UsersMapper {
     @Delete({
@@ -27,35 +24,18 @@ public interface UsersMapper {
     })
     int insert(Users record);
 
+    int insertSelective(Users record);
+
     @Select({
         "select",
         "id, username, password, roleid, active",
         "from users",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
-        @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
-        @Result(column="roleid", property="roleid", jdbcType=JdbcType.BIGINT),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
+    @ResultMap("com.ncee.dao.domain.UsersMapper.BaseResultMap")
     Users selectByPrimaryKey(Long id);
 
-    @Select({
-        "select",
-        "id, username, password, roleid, active",
-        "from users",
-        "order by id desc"
-    })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
-        @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
-        @Result(column="roleid", property="roleid", jdbcType=JdbcType.BIGINT),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
-    List<Users> selectAll();
+    int updateByPrimaryKeySelective(Users record);
 
     @Update({
         "update users",

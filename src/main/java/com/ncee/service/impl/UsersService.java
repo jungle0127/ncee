@@ -14,6 +14,6 @@ public class UsersService implements IUsersService {
 	@Autowired
 	private UsersMapper userMapper;
 	public List<Users> getAllUsers(){
-		return this.userMapper.selectAll();
+		return null;
 	}
 }

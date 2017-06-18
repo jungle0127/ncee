@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncee.dao.domain.KnowledgeModuleMapper">
+  <resultMap id="BaseResultMap" type="com.ncee.dao.model.KnowledgeModule">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="book_id" jdbcType="BIGINT" property="bookId" />
+    <result column="modulename" jdbcType="VARCHAR" property="modulename" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="active" jdbcType="INTEGER" property="active" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, book_id, modulename, note, active
+  </sql>
+  <insert id="insertSelective" parameterType="com.ncee.dao.model.KnowledgeModule">
+    insert into knowledge_module
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="modulename != null">
+        modulename,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="active != null">
+        active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="bookId != null">
+        #{bookId,jdbcType=BIGINT},
+      </if>
+      <if test="modulename != null">
+        #{modulename,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncee.dao.model.KnowledgeModule">
+    update knowledge_module
+    <set>
+      <if test="bookId != null">
+        book_id = #{bookId,jdbcType=BIGINT},
+      </if>
+      <if test="modulename != null">
+        modulename = #{modulename,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        active = #{active,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

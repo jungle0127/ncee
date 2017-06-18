@@ -1,14 +1,11 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.Province;
-import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.type.JdbcType;
 
 public interface ProvinceMapper {
     @Delete({
@@ -25,31 +22,18 @@ public interface ProvinceMapper {
     })
     int insert(Province record);
 
+    int insertSelective(Province record);
+
     @Select({
         "select",
         "id, province, active",
         "from province",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="province", property="province", jdbcType=JdbcType.VARCHAR),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
+    @ResultMap("com.ncee.dao.domain.ProvinceMapper.BaseResultMap")
     Province selectByPrimaryKey(Long id);
 
-    @Select({
-        "select",
-        "id, province, active",
-        "from province",
-        "order by id desc"
-    })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="province", property="province", jdbcType=JdbcType.VARCHAR),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
-    List<Province> selectAll();
+    int updateByPrimaryKeySelective(Province record);
 
     @Update({
         "update province",
