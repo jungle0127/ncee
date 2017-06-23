@@ -7,13 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.ncee.dao.domain.UsersMapper;
 import com.ncee.dao.model.Users;
-import com.ncee.service.IUsersService;
+import com.ncee.service.IUserService;
 
 @Service("userService")
-public class UsersService implements IUsersService {
+public class UserService implements IUserService {
 	@Autowired
 	private UsersMapper userMapper;
+	@Override
 	public List<Users> getAllUsers(){
-		return null;
+		return this.userMapper.selectAllUsers();
+	}
+	@Override
+	public Users login(String loginName,String password){
+		return this.userMapper.selectUserByLogin(loginName, password);
 	}
 }
