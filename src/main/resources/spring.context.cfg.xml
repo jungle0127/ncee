@@ -16,15 +16,21 @@
 			            http://www.springframework.org/schema/tx/spring-tx.xsd
 			            http://mybatis.org/schema/mybatis-spring 
 			            http://mybatis.org/schema/mybatis-spring.xsd ">
-	<context:component-scan base-package="com.ncee.beans,com.ncee.service.impl,com.ncee.dao.domain"/>
+	<context:component-scan base-package="com.ncee.model,com.ncee.service.impl,com.ncee.dao.domain"/>
 	<context:property-placeholder location="classpath:mysql.properties" />
 	<!-- <context:property-override location="classpath:mysql.properties"/>  -->
 	<mybatis:scan base-package="com.ncee.dao.domain"/>
 	<!-- Configure c3p0 data source -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${dataSource.driverClass}"/>
+		<property name="jdbcUrl" value="${dataSource.jdbcUrl}"/>
+		<property name="user" value="${dataSource.user}"/>
+		<property name="password" value="${dataSource.password}"/>
 	</bean>
-	<!-- configure SqlSessionFactory, it's for integration Sprint and Mybatis -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dataSource"></bean>
+	<!-- configure SqlSessionFactory, it's for integration Spring and Mybatis -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dataSource">
+		<property name="configLocation" value="classpath:mybatis.cfg.xml"></property>		
+	</bean>
 	<!-- JDBC transaction management -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource"></bean>
 	<!-- Annotation transaction management -->

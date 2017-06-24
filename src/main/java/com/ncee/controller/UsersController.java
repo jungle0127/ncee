@@ -22,7 +22,7 @@ public class UsersController {
 	@Qualifier("userService")
 	private IUserService usersService;
 	
-	@RequestMapping(value="/users")
+	@RequestMapping(value="/login")
 	public ModelAndView login(String loginName,String password,ModelAndView mv,HttpSession session){
 		Users user = this.usersService.login(loginName, password);
 		if(null != user){

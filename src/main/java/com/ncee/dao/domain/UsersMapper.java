@@ -45,10 +45,10 @@ public interface UsersMapper {
     	"select",
     	"id,username,password,roleid,active",
     	"from users",
-    	"where username = #{loginName,jdbcType=VARCHAR}",
+    	"where username = #{username,jdbcType=VARCHAR}",
     	"and password = #{password,jdbcType=VARCHAR}"
     })
-    Users selectUserByLogin(String loginName,String password);
+    Users selectUserByLogin(Users record);
     
     int updateByPrimaryKeySelective(Users record);
     

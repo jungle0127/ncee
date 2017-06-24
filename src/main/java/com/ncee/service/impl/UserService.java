@@ -19,6 +19,9 @@ public class UserService implements IUserService {
 	}
 	@Override
 	public Users login(String loginName,String password){
-		return this.userMapper.selectUserByLogin(loginName, password);
+		Users userPojo = new Users();
+		userPojo.setUsername(loginName);
+		userPojo.setPassword(password);
+		return this.userMapper.selectUserByLogin(userPojo);
 	}
 }
