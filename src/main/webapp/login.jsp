@@ -7,14 +7,14 @@
 <title>登录页面</title>
 </head>
 <body>
-<form action="login" method="post">
+<form action="user/login" method="post">
 	<table>
 		<tr>
 			<td>
 				<label>登录名</label>
 			</td>
 			<td>
-				<input type="text" id="loginName" name="loginName"/>
+				<input type="text" id="loginName" value="ps" name="loginName"/>
 			</td>
 		</tr>
 		<tr>
@@ -22,7 +22,7 @@
 				<label>密码</label>
 			</td>
 			<td>
-				<input type="password" id="password" name="password"/>
+				<input type="password" id="password" value="lotus" name="password"/>
 			</td>
 		</tr>
 		<tr>

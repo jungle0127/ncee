@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -16,6 +17,7 @@ import com.ncee.dao.model.Users;
 import com.ncee.service.IUserService;
 
 @Controller
+@RequestMapping("/user")
 public class UsersController {
 	private final static Logger logger = LogManager.getLogger(UsersController.class);
 	@Autowired
@@ -23,16 +25,16 @@ public class UsersController {
 	private IUserService usersService;
 	
 	@RequestMapping(value="/login")
-	public ModelAndView login(String loginName,String password,ModelAndView mv,HttpSession session){
+	public ModelAndView login(@RequestParam("loginName") String loginName, @RequestParam("password") String password,ModelAndView mv,HttpSession session){
 		Users user = this.usersService.login(loginName, password);
 		if(null != user){
 			logger.info("Login success with user:{}",user.getUsername());
-			mv.setView(new RedirectView("assistancepage/welcome"));
+			mv.setView(new RedirectView("assisancepage/welcome"));
 			return mv;
 		}
 		else{
 			mv.addObject("message","User name or password invalid.");
-			mv.setViewName("/index");
+			mv.setViewName("index");
 			return mv;
 		}
 	}
