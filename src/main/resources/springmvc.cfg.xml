@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans
@@ -16,6 +17,10 @@
 	<mvc:annotation-driven/>
 	<mvc:default-servlet-handler/>
 
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/content/" p:suffix=".jsp" />
+<!-- 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
 			<value>/WEB-INF/</value>
@@ -25,4 +30,5 @@
 		</property>
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
 	</bean>
+ -->
 </beans>
