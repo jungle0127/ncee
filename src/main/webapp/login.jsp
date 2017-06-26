@@ -7,7 +7,7 @@
 <title>登录页面</title>
 </head>
 <body>
-<form action="user/login" method="post">
+<form action="login" method="post">
 	<table>
 		<tr>
 			<td>
