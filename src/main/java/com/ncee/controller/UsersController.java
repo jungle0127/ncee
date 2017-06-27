@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.ncee.dao.model.Users;
 import com.ncee.service.IUserService;
@@ -30,8 +29,8 @@ public class UsersController {
 		Users user = this.usersService.login(loginName, password);
 		if(null != user){
 			logger.info("Login success with user:{}",user.getUsername());
-			mv.setView(new RedirectView("welcome"));
-			return new ModelAndView("redirect:welcome");
+			mv.setViewName("welcome");
+			return mv;
 		}
 		else{
 			mv.addObject("message","User name or password invalid.");

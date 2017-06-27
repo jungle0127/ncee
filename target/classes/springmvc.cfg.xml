@@ -17,18 +17,9 @@
 	<mvc:annotation-driven/>
 	<mvc:default-servlet-handler/>
 
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:prefix="/WEB-INF/content/" p:suffix=".jsp" />
-<!-- 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix">
-			<value>/WEB-INF/</value>
-		</property> 
-		<property name="suffix">
-			<value>.jsp</value>
-		</property>
+		<property name="prefix" value="/WEB-INF/assistancepage/"/>
+        <property name="suffix" value=".jsp"/>
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
 	</bean>
- -->
 </beans>
