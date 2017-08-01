@@ -22,4 +22,13 @@
         <property name="suffix" value=".jsp"/>
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
 	</bean>
+	
+	<!-- Velocity Configuration -->
+	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">  
+	    <property name="resourceLoaderPath" value="/WEB-INF/views" />  
+	    <property name="configLocation" value="classpath:velocity.properties" />  
+	</bean>  
+	<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">  
+	    <property name="suffix" value=".vm" />  
+	</bean>
 </beans>
