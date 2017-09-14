@@ -10,7 +10,7 @@ public class LoginController {
 	@RequestMapping(value="/",method={RequestMethod.GET})
 	public ModelAndView index(){
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("login");
+		mv.setViewName("welcome");
 		return mv;
 	}
 }

@@ -1,11 +1,14 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.QuestionType;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.type.JdbcType;
 
 public interface QuestionTypeMapper {
     @Delete({
@@ -22,18 +25,31 @@ public interface QuestionTypeMapper {
     })
     int insert(QuestionType record);
 
-    int insertSelective(QuestionType record);
-
     @Select({
         "select",
         "id, type, active",
         "from question_type",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.ncee.dao.domain.QuestionTypeMapper.BaseResultMap")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
     QuestionType selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(QuestionType record);
+    @Select({
+        "select",
+        "id, type, active",
+        "from question_type",
+        "order by id desc"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
+    List<QuestionType> selectAll();
 
     @Update({
         "update question_type",

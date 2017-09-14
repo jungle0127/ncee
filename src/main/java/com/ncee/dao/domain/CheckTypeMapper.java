@@ -1,11 +1,14 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.CheckType;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.type.JdbcType;
 
 public interface CheckTypeMapper {
     @Delete({
@@ -22,18 +25,31 @@ public interface CheckTypeMapper {
     })
     int insert(CheckType record);
 
-    int insertSelective(CheckType record);
-
     @Select({
         "select",
         "id, type, active",
         "from check_type",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.ncee.dao.domain.CheckTypeMapper.BaseResultMap")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
     CheckType selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(CheckType record);
+    @Select({
+        "select",
+        "id, type, active",
+        "from check_type",
+        "order by id desc"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
+    List<CheckType> selectAll();
 
     @Update({
         "update check_type",

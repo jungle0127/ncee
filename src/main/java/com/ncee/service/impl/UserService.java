@@ -15,13 +15,13 @@ public class UserService implements IUserService {
 	private UsersMapper userMapper;
 	@Override
 	public List<Users> getAllUsers(){
-		return this.userMapper.selectAllUsers();
+		return this.userMapper.selectAll();
 	}
 	@Override
 	public Users login(String loginName,String password){
 		Users userPojo = new Users();
 		userPojo.setUsername(loginName);
 		userPojo.setPassword(password);
-		return this.userMapper.selectUserByLogin(userPojo);
+		return this.userMapper.selectByLogin(userPojo);
 	}
 }

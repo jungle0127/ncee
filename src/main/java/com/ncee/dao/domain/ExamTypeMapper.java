@@ -1,11 +1,14 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.ExamType;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.type.JdbcType;
 
 public interface ExamTypeMapper {
     @Delete({
@@ -22,18 +25,31 @@ public interface ExamTypeMapper {
     })
     int insert(ExamType record);
 
-    int insertSelective(ExamType record);
-
     @Select({
         "select",
         "id, type, active",
         "from exam_type",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.ncee.dao.domain.ExamTypeMapper.BaseResultMap")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
     ExamType selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(ExamType record);
+    @Select({
+        "select",
+        "id, type, active",
+        "from exam_type",
+        "order by id desc"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="type", property="type", jdbcType=JdbcType.VARCHAR),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
+    List<ExamType> selectAll();
 
     @Update({
         "update exam_type",

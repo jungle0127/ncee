@@ -1,11 +1,14 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.Knowledge;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.type.JdbcType;
 
 public interface KnowledgeMapper {
     @Delete({
@@ -24,18 +27,35 @@ public interface KnowledgeMapper {
     })
     int insert(Knowledge record);
 
-    int insertSelective(Knowledge record);
-
     @Select({
         "select",
         "id, module_id, knowledge, description, active",
         "from knowledge",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.ncee.dao.domain.KnowledgeMapper.BaseResultMap")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="module_id", property="moduleId", jdbcType=JdbcType.BIGINT),
+        @Result(column="knowledge", property="knowledge", jdbcType=JdbcType.VARCHAR),
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
     Knowledge selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Knowledge record);
+    @Select({
+        "select",
+        "id, module_id, knowledge, description, active",
+        "from knowledge",
+        "order by id desc"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="module_id", property="moduleId", jdbcType=JdbcType.BIGINT),
+        @Result(column="knowledge", property="knowledge", jdbcType=JdbcType.VARCHAR),
+        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
+    List<Knowledge> selectAll();
 
     @Update({
         "update knowledge",

@@ -65,5 +65,5 @@
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
-  </update>
+  </update>  
 </mapper>

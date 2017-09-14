@@ -1,11 +1,14 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.Score;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.type.JdbcType;
 
 public interface ScoreMapper {
     @Delete({
@@ -22,18 +25,31 @@ public interface ScoreMapper {
     })
     int insert(Score record);
 
-    int insertSelective(Score record);
-
     @Select({
         "select",
         "id, score, active",
         "from score",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.ncee.dao.domain.ScoreMapper.BaseResultMap")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="score", property="score", jdbcType=JdbcType.INTEGER),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
     Score selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Score record);
+    @Select({
+        "select",
+        "id, score, active",
+        "from score",
+        "order by id desc"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="score", property="score", jdbcType=JdbcType.INTEGER),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
+    List<Score> selectAll();
 
     @Update({
         "update score",

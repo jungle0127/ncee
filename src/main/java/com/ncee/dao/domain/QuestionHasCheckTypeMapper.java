@@ -1,11 +1,14 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.QuestionHasCheckType;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.type.JdbcType;
 
 public interface QuestionHasCheckTypeMapper {
     @Delete({
@@ -22,18 +25,33 @@ public interface QuestionHasCheckTypeMapper {
     })
     int insert(QuestionHasCheckType record);
 
-    int insertSelective(QuestionHasCheckType record);
-
     @Select({
         "select",
         "id, question_id, check_type_id, active",
         "from question_has_check_type",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.ncee.dao.domain.QuestionHasCheckTypeMapper.BaseResultMap")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="question_id", property="questionId", jdbcType=JdbcType.BIGINT),
+        @Result(column="check_type_id", property="checkTypeId", jdbcType=JdbcType.BIGINT),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
     QuestionHasCheckType selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(QuestionHasCheckType record);
+    @Select({
+        "select",
+        "id, question_id, check_type_id, active",
+        "from question_has_check_type",
+        "order by id desc"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="question_id", property="questionId", jdbcType=JdbcType.BIGINT),
+        @Result(column="check_type_id", property="checkTypeId", jdbcType=JdbcType.BIGINT),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
+    List<QuestionHasCheckType> selectAll();
 
     @Update({
         "update question_has_check_type",

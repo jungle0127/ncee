@@ -1,11 +1,14 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.QuestionSelection;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.type.JdbcType;
 
 public interface QuestionSelectionMapper {
     @Delete({
@@ -24,18 +27,35 @@ public interface QuestionSelectionMapper {
     })
     int insert(QuestionSelection record);
 
-    int insertSelective(QuestionSelection record);
-
     @Select({
         "select",
         "question_selection_id, question_id, selection_index, selection, active",
         "from question_selection",
         "where question_selection_id = #{questionSelectionId,jdbcType=BIGINT}"
     })
-    @ResultMap("com.ncee.dao.domain.QuestionSelectionMapper.BaseResultMap")
+    @Results({
+        @Result(column="question_selection_id", property="questionSelectionId", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="question_id", property="questionId", jdbcType=JdbcType.BIGINT),
+        @Result(column="selection_index", property="selectionIndex", jdbcType=JdbcType.VARCHAR),
+        @Result(column="selection", property="selection", jdbcType=JdbcType.VARCHAR),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
     QuestionSelection selectByPrimaryKey(Long questionSelectionId);
 
-    int updateByPrimaryKeySelective(QuestionSelection record);
+    @Select({
+        "select",
+        "question_selection_id, question_id, selection_index, selection, active",
+        "from question_selection",
+        "order by id desc"
+    })
+    @Results({
+        @Result(column="question_selection_id", property="questionSelectionId", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="question_id", property="questionId", jdbcType=JdbcType.BIGINT),
+        @Result(column="selection_index", property="selectionIndex", jdbcType=JdbcType.VARCHAR),
+        @Result(column="selection", property="selection", jdbcType=JdbcType.VARCHAR),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
+    List<QuestionSelection> selectAll();
 
     @Update({
         "update question_selection",

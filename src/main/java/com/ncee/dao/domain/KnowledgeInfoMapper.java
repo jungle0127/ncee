@@ -1,11 +1,14 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.KnowledgeInfo;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.type.JdbcType;
 
 public interface KnowledgeInfoMapper {
     @Delete({
@@ -26,18 +29,39 @@ public interface KnowledgeInfoMapper {
     })
     int insert(KnowledgeInfo record);
 
-    int insertSelective(KnowledgeInfo record);
-
     @Select({
         "select",
         "id, year_id, province_id, module_id, level_id, knowledge_id, active",
         "from knowledge_info",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.ncee.dao.domain.KnowledgeInfoMapper.BaseResultMap")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="year_id", property="yearId", jdbcType=JdbcType.BIGINT),
+        @Result(column="province_id", property="provinceId", jdbcType=JdbcType.BIGINT),
+        @Result(column="module_id", property="moduleId", jdbcType=JdbcType.BIGINT),
+        @Result(column="level_id", property="levelId", jdbcType=JdbcType.BIGINT),
+        @Result(column="knowledge_id", property="knowledgeId", jdbcType=JdbcType.BIGINT),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
     KnowledgeInfo selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(KnowledgeInfo record);
+    @Select({
+        "select",
+        "id, year_id, province_id, module_id, level_id, knowledge_id, active",
+        "from knowledge_info",
+        "order by id desc"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="year_id", property="yearId", jdbcType=JdbcType.BIGINT),
+        @Result(column="province_id", property="provinceId", jdbcType=JdbcType.BIGINT),
+        @Result(column="module_id", property="moduleId", jdbcType=JdbcType.BIGINT),
+        @Result(column="level_id", property="levelId", jdbcType=JdbcType.BIGINT),
+        @Result(column="knowledge_id", property="knowledgeId", jdbcType=JdbcType.BIGINT),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
+    List<KnowledgeInfo> selectAll();
 
     @Update({
         "update knowledge_info",

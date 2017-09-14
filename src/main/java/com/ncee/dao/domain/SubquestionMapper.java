@@ -1,11 +1,14 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.Subquestion;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.type.JdbcType;
 
 public interface SubquestionMapper {
     @Delete({
@@ -24,18 +27,37 @@ public interface SubquestionMapper {
     })
     int insert(Subquestion record);
 
-    int insertSelective(Subquestion record);
-
     @Select({
         "select",
         "id, subquestion, question_id, score_id, sqindex, active",
         "from subquestion",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.ncee.dao.domain.SubquestionMapper.BaseResultMap")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="subquestion", property="subquestion", jdbcType=JdbcType.VARCHAR),
+        @Result(column="question_id", property="questionId", jdbcType=JdbcType.BIGINT),
+        @Result(column="score_id", property="scoreId", jdbcType=JdbcType.BIGINT),
+        @Result(column="sqindex", property="sqindex", jdbcType=JdbcType.INTEGER),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
     Subquestion selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Subquestion record);
+    @Select({
+        "select",
+        "id, subquestion, question_id, score_id, sqindex, active",
+        "from subquestion",
+        "order by id desc"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="subquestion", property="subquestion", jdbcType=JdbcType.VARCHAR),
+        @Result(column="question_id", property="questionId", jdbcType=JdbcType.BIGINT),
+        @Result(column="score_id", property="scoreId", jdbcType=JdbcType.BIGINT),
+        @Result(column="sqindex", property="sqindex", jdbcType=JdbcType.INTEGER),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
+    List<Subquestion> selectAll();
 
     @Update({
         "update subquestion",

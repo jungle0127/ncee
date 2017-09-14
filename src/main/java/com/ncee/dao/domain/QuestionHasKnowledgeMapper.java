@@ -1,11 +1,14 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.QuestionHasKnowledge;
+import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.type.JdbcType;
 
 public interface QuestionHasKnowledgeMapper {
     @Delete({
@@ -22,18 +25,33 @@ public interface QuestionHasKnowledgeMapper {
     })
     int insert(QuestionHasKnowledge record);
 
-    int insertSelective(QuestionHasKnowledge record);
-
     @Select({
         "select",
         "id, question_id, knowledge_id, active",
         "from question_has_knowledge",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.ncee.dao.domain.QuestionHasKnowledgeMapper.BaseResultMap")
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="question_id", property="questionId", jdbcType=JdbcType.BIGINT),
+        @Result(column="knowledge_id", property="knowledgeId", jdbcType=JdbcType.BIGINT),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
     QuestionHasKnowledge selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(QuestionHasKnowledge record);
+    @Select({
+        "select",
+        "id, question_id, knowledge_id, active",
+        "from question_has_knowledge",
+        "order by id desc"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="question_id", property="questionId", jdbcType=JdbcType.BIGINT),
+        @Result(column="knowledge_id", property="knowledgeId", jdbcType=JdbcType.BIGINT),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
+    List<QuestionHasKnowledge> selectAll();
 
     @Update({
         "update question_has_knowledge",
