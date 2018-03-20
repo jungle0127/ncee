@@ -1,0 +1,11 @@
+server:
+  port: 8080
+  servlet:
+    contextPath: /ncee
+spring:
+  datasource:
+    name: primaryDataSource
+    username: root
+    password: lotus
+    url: jdbc:mysql://127.0.0.1:3306/ncee?serverTimezone=CTT&useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+    driver-class-name: com.mysql.jdbc.Driver
