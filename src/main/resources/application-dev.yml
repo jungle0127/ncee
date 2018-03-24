@@ -19,10 +19,10 @@ spring:
     charset: UTF-8 # Banner file encoding.
     location: classpath:banner/banner.txt # Banner text resource location.
     image:
-      location: classpath:banner/banner.jpg 
+      location: classpath:banner/banner.png 
       # Banner image file location (jpg or png can also be used).
       width: 70 # Width of the banner image in chars.
-      height: 30 # Height of the banner image in chars (default based on image height).
+      height: 20 # Height of the banner image in chars (default based on image height).
       margin: 2 # Left hand image margin in chars.
       invert: true # Whether images should be inverted for dark terminal themes.
 mybatis:
