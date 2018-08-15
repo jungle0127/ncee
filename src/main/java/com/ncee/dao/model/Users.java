@@ -1,10 +1,12 @@
 package com.ncee.dao.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Users {
     private Long id;
 
     private String username;
-
+    @JsonIgnore
     private String password;
 
     private Long roleid;

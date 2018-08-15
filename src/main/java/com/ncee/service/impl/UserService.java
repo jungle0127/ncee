@@ -28,4 +28,9 @@ public class UserService implements IUserService {
 		logger.info("Login in with user name:{}",loginName);
 		return this.userMapper.selectByLogin(userPojo);
 	}
+	@Override
+	public Users selectUserByLoginName(String loginName) {
+
+		return this.userMapper.selectByLoginName(loginName);
+	}
 }

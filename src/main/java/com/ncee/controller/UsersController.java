@@ -33,4 +33,8 @@ public class UsersController {
 			return false;
 		}
 	}
+	@GetMapping("/user/{loginName}")
+	public Users getUserDetailInfo(@PathVariable String loginName) {
+		return null;
+	}
 }

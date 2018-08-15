@@ -41,7 +41,21 @@ public interface UsersMapper {
         @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
     })
     Users selectByPrimaryKey(Long id);
-
+    @Select({
+    	"select",
+        "id, username, password, roleid, active",
+        "from users",
+        "where username = #{loginName,jdbcType=VARCHAR}"
+    })
+    @Results({
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
+        @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
+        @Result(column="roleid", property="roleid", jdbcType=JdbcType.BIGINT),
+        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
+    Users selectByLoginName(String loginName) ;
+    
     @Select({
         "select",
         "id, username, password, roleid, active",
