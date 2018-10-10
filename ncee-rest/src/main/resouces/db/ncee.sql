@@ -21,6 +21,14 @@ create table UserConnection (userId varchar(255) not null,
 	expireTime bigint,
 	primary key (userId, providerId, providerUserId));
 create unique index UserConnectionRank on UserConnection(userId, providerId, rank);
+ --
+ -- remember-me token from JdbcTokenRepositoryImpl
+ --
+create table persistent_logins (
+    username varchar(64) not null,
+    series varchar(64) primary key,
+    token varchar(64) not null,
+    last_used timestamp not null);
 
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (

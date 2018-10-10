@@ -1,5 +1,5 @@
 server:
-  port: 8088
+  port: 8080
   servlet:
     context-path: /ncee
 logging:
@@ -16,8 +16,8 @@ spring:
   devtools:
     restart:
       enabled: true
+mybatis:
+  config-location: classpath:/mybatis.cfg.xml
 ncee:
   swagger:
     enable: true
-mybatis:
-  config-location: classpath:/mybatis.cfg.xml
