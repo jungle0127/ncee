@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<dataset>
-	<users id="1" username="ps" password="lotus" roleid="1" active="1"/>
-	<users id="2" username="admin" password="admin" roleid="1" active="1"/>
-</dataset>
