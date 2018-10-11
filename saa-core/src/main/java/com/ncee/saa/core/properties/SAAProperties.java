@@ -6,8 +6,26 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "ncee.saa")
 public class SAAProperties {
+    private String loginPage = "/authentication/authenticate";
+    private String loginProcessingUrl = "/authentication/form";
     private ValidateCodeProperties validateCode;
     private OAuth2Properties oauth2;
+
+    public String getLoginPage() {
+        return loginPage;
+    }
+
+    public void setLoginPage(String loginPage) {
+        this.loginPage = loginPage;
+    }
+
+    public String getLoginProcessingUrl() {
+        return loginProcessingUrl;
+    }
+
+    public void setLoginProcessingUrl(String loginProcessingUrl) {
+        this.loginProcessingUrl = loginProcessingUrl;
+    }
 
     public ValidateCodeProperties getValidateCode() {
         return validateCode;

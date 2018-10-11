@@ -21,3 +21,16 @@ mybatis:
 ncee:
   swagger:
     enable: true
+  saa:
+    loginPage: /authentication/authenticate
+    loginProcessingUrl: /authentication/form
+    validateCode:
+      sms:
+        length: 4
+        expiredInSeconds: 300
+      image:
+        length: 4
+        expiredInSeconds: 300
+        width: 67
+        height: 23
+
