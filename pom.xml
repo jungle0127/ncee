@@ -95,5 +95,6 @@
         <module>ncee-ui</module>
         <module>saa-core</module>
         <module>saa-app</module>
+        <module>saa-browser</module>
     </modules>
 </project>

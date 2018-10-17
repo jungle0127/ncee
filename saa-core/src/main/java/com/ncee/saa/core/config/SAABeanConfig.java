@@ -4,6 +4,8 @@ import com.ncee.saa.core.handler.DefaultAuthenticationFailureHandler;
 import com.ncee.saa.core.handler.DefaultAuthenticationSuccessHandler;
 import com.ncee.saa.core.properties.SAAProperties;
 import com.ncee.saa.core.service.DefaultUserDetailsService;
+import com.ncee.saa.core.validate.sender.SMSCodeSender;
+import com.ncee.saa.core.validate.sender.impl.DefaultSMSCodeSenderImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -36,5 +38,11 @@ public class SAABeanConfig {
     @ConditionalOnMissingBean(UserDetailsService.class)
     public UserDetailsService userDetailsService(){
         return new DefaultUserDetailsService();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(SMSCodeSender.class)
+    public SMSCodeSender smsCodeSender(){
+        return new DefaultSMSCodeSenderImpl();
     }
 }

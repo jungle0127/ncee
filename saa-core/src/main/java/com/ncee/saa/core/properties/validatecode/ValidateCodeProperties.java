@@ -1,22 +1,22 @@
 package com.ncee.saa.core.properties.validatecode;
 
 public class ValidateCodeProperties {
-    private SMSCodeProperties sms;
-    private ImageCodeProperties image;
+    private SMSCodeProperties smsCode;
+    private ImageCodeProperties imageCode;
 
-    public SMSCodeProperties getSms() {
-        return sms;
+    public SMSCodeProperties getSmsCode() {
+        return smsCode;
     }
 
-    public void setSms(SMSCodeProperties sms) {
-        this.sms = sms;
+    public void setSmsCode(SMSCodeProperties smsCode) {
+        this.smsCode = smsCode;
     }
 
-    public ImageCodeProperties getImage() {
-        return image;
+    public ImageCodeProperties getImageCode() {
+        return imageCode;
     }
 
-    public void setImage(ImageCodeProperties image) {
-        this.image = image;
+    public void setImageCode(ImageCodeProperties imageCode) {
+        this.imageCode = imageCode;
     }
 }
