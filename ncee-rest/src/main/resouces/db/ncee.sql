@@ -29,7 +29,45 @@ create table persistent_logins (
     series varchar(64) primary key,
     token varchar(64) not null,
     last_used timestamp not null);
+-- -------------------------------------- User tables --------------------------------------
+--
+-- users table
+--
+CREATE TABLE users(
+  username VARCHAR(64) not null,
+  password varchar(64) not null,
+  enable BOOLEAN NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+--
+-- authorities table
+--
+CREATE TABLE authorities(
+  username VARCHAR(64) not null,
+  authority varchar(64) not null,
+  CONSTRAINT fk_authorities_users FOREIGN KEY (username) REFERENCES ncee.users(username)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+CREATE UNIQUE INDEX  ix_auth_username ON authorities (username,authority);
+-- -------------------------------------- group tables --------------------------------------
 
+CREATE TABLE  groups (
+  id BIGINT AUTO_INCREMENT primary key,
+  group_name VARCHAR(64) not null
+)ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+create table group_authorities (
+  group_id bigint not null,
+  authority varchar(64) not null,
+  constraint fk_group_authorities_group foreign key(group_id) references groups(id)
+);
+
+create table group_members (
+  id bigint AUTO_INCREMENT primary key,
+  username varchar(50) not null,
+  group_id bigint not null,
+  constraint fk_group_members_group foreign key(group_id) references groups(id)
+);
+-- -------------------------------------------------------------------------
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
 `id` bigint(20) auto_increment,
