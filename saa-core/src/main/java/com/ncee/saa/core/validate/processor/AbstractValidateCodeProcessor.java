@@ -2,16 +2,16 @@ package com.ncee.saa.core.validate.processor;
 
 import com.ncee.saa.core.validate.code.ValidateCode;
 import com.ncee.saa.core.validate.generator.ValidateCodeGenerator;
+import com.ncee.saa.core.validate.respository.ValidateCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.connect.web.HttpSessionSessionStrategy;
-import org.springframework.social.connect.web.SessionStrategy;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import java.io.IOException;
 import java.util.Map;
 
 public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> implements ValidateCodeProcessor {
-    private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
+    @Autowired
+    private ValidateCodeRepository validateCodeRepository;
     @Autowired
     private Map<String, ValidateCodeGenerator> validateCodeGeneratorMap;
     @Override

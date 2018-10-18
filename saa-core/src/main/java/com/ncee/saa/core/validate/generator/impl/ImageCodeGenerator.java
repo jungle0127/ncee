@@ -20,15 +20,39 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
     private SAAProperties saaProperties;
     @Override
     public ValidateCode generate(ServletWebRequest request) {
-        int width = ServletRequestUtils.getIntParameter(request.getRequest(), "width", this.saaProperties.getValidateCode().getImageCode().getWidth());
-        int height = ServletRequestUtils.getIntParameter(request.getRequest(),"height",this.saaProperties.getValidateCode().getImageCode().getHeight());
-
+        Integer width = ServletRequestUtils.getIntParameter(request.getRequest(), "width", this.saaProperties.getValidateCode().getImageCode().getWidth());
+        Integer height = ServletRequestUtils.getIntParameter(request.getRequest(),"height",this.saaProperties.getValidateCode().getImageCode().getHeight());
+        Integer expiredInSeconds = this.saaProperties.getValidateCode().getImageCode().getExpiredInSeconds();
         String code = RandomStringUtils.randomNumeric(this.saaProperties.getValidateCode().getImageCode().getLength());
-        return new ImageCode(code,this.saaProperties.getValidateCode().getImageCode().getExpiredInSeconds(),null);
+
+        BufferedImage bufferedImage = createImage(width,height,code);
+
+        return new ImageCode(code, expiredInSeconds,bufferedImage);
     }
-    public BufferedImage createImage(){
-        return null;
+    private BufferedImage createImage(Integer width,Integer height, String code){
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics g = image.getGraphics();
+        Random random = new Random();
+
+        g.setColor(getRandColor(200, 250));
+        g.fillRect(0, 0, width, height);
+        g.setFont(new Font("Times New Roman", Font.ITALIC, 20));
+        g.setColor(getRandColor(160, 200));
+        for (int i = 0; i < 155; i++) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            int xl = random.nextInt(12);
+            int yl = random.nextInt(12);
+            g.drawLine(x, y, x + xl, y + yl);
+        }
+        for(int index = 0; index < code.length();index++){
+            g.setColor(new Color(20 + random.nextInt(110), 20 + random.nextInt(110), 20 + random.nextInt(110)));
+            g.drawString(String.valueOf(code.charAt(index)), 13 * index + 6, 16);
+        }
+        g.dispose();
+        return image;
     }
+
     /**
      * Generate random ribbon for background of the image
      * @param fc
