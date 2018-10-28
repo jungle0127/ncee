@@ -33,7 +33,7 @@ public class AuthController {
             String targetUrl = savedRequest.getRedirectUrl();
             logger.info(String.format("target url %s",targetUrl));
             if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
-                redirectStrategy.sendRedirect(request, response, saaProperties.getLoginPage());
+                redirectStrategy.sendRedirect(request, response, saaProperties.getBrowser().getLoginPage());
             }
         }
         return new RestResponse<String>("The resource needs authentication, please redirect to login page.");

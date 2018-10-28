@@ -7,9 +7,26 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "ncee.saa")
 public class SAAProperties {
+    private String contextPath = "/ncee";
     private BrowserProperties browser = new BrowserProperties();
     private ValidateCodeProperties validateCode = new ValidateCodeProperties();
     private OAuth2Properties oauth2 = new OAuth2Properties();
+
+    public String getContextPath() {
+        return contextPath;
+    }
+
+    public void setContextPath(String contextPath) {
+        this.contextPath = contextPath;
+    }
+
+    public BrowserProperties getBrowser() {
+        return browser;
+    }
+
+    public void setBrowser(BrowserProperties browser) {
+        this.browser = browser;
+    }
 
     public ValidateCodeProperties getValidateCode() {
         return validateCode;

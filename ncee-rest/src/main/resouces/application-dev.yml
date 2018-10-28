@@ -22,8 +22,11 @@ ncee:
   swagger:
     enable: true
   saa:
-    loginPage: /authentication/authenticate
-    loginProcessingUrl: /authentication/form
+    contextPath: /ncee
+    browser:
+      loginPage: /default-sign-in.html
+      loginProcessingUrl: /authentication/form
+      loginType: REDIRECT
     validateCode:
       sms:
         length: 4

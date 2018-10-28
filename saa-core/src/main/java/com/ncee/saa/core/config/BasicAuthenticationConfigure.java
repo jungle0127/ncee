@@ -19,7 +19,7 @@ public class BasicAuthenticationConfigure {
         http.formLogin()
                 .successHandler(authenticationSuccessHandler)
                 .failureHandler(authenticationFailureHandler)
-                .loginPage(saaProperties.getLoginPage())
-                .loginProcessingUrl(saaProperties.getLoginProcessingUrl());
+                .loginPage(saaProperties.getBrowser().getLoginPage())
+                .loginProcessingUrl(saaProperties.getBrowser().getLoginProcessingUrl());
     }
 }

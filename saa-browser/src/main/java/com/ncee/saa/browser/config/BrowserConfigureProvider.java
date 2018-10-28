@@ -1,8 +1,6 @@
-package com.ncee.saa.core.matcher.impl;
+package com.ncee.saa.browser.config;
 
 import com.ncee.saa.core.matcher.MatcherProvider;
-import com.ncee.saa.core.properties.SAAProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
@@ -10,12 +8,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(Integer.MIN_VALUE)
-public class MatcherProviderImpl implements MatcherProvider {
-    @Autowired
-    private SAAProperties saaProperties;
+public class BrowserConfigureProvider implements MatcherProvider {
     @Override
     public void configMatcher(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
-        config.antMatchers(saaProperties.getBrowser().getLoginPage(),
-                saaProperties.getBrowser().getLoginProcessingUrl()).permitAll();
+        config.antMatchers("/**/*.js","/**/*.css",
+                "/**/*.jpg","/**/*.jpeg","/**/*.png","/**/*.gif").permitAll();
     }
 }
