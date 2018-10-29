@@ -28,12 +28,16 @@ public class SAABrowserConfig extends WebSecurityConfigurerAdapter {
     private PersistentTokenRepository persistentTokenRepository;
     @Autowired
     private SMSCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+    @Autowired
+    private ImageCodeFilter imageCodeFilter;
+    @Autowired
+    private SMSCodeFilter smsCodeFilter;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         basicAuthenticationConfigure.configure(http);
         matcherManager.configMatcher(http.authorizeRequests());
-        http.addFilterBefore(new ImageCodeFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new SMSCodeFilter(),UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(imageCodeFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(imageCodeFilter,UsernamePasswordAuthenticationFilter.class);
 
         http.rememberMe()
                 .tokenRepository(persistentTokenRepository)

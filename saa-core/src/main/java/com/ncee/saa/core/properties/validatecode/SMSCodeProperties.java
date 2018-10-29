@@ -1,8 +1,8 @@
 package com.ncee.saa.core.properties.validatecode;
 
 public class SMSCodeProperties {
-    private int length;
-    private int expiredInSeconds;
+    private int length = 6;
+    private int expiredInSeconds = 3600;
 
     public int getLength() {
         return length;

@@ -24,12 +24,12 @@ ncee:
   saa:
     contextPath: /ncee
     browser:
-      loginPage: /default-sign-in.html
+      loginPage: /default-sms-code-sign-in.html
       loginProcessingUrl: /authentication/form
       loginType: REDIRECT
     validateCode:
       sms:
-        length: 4
+        length: 6
         expiredInSeconds: 300
       image:
         length: 4

@@ -1,5 +1,7 @@
 package com.ncee.saa.core.validate.processor.impl;
 
+import com.ncee.saa.core.properties.SAAConstants;
+import com.ncee.saa.core.properties.SAAProperties;
 import com.ncee.saa.core.validate.code.SMSCode;
 import com.ncee.saa.core.validate.processor.AbstractValidateCodeProcessor;
 import com.ncee.saa.core.validate.sender.SMSCodeSender;
@@ -12,9 +14,11 @@ import org.springframework.web.context.request.ServletWebRequest;
 public class SMSValidateCodeProcessor extends AbstractValidateCodeProcessor<SMSCode> {
     @Autowired
     private SMSCodeSender smsCodeSender;
+    @Autowired
+    private SAAProperties saaProperties;
     @Override
     public void send(ServletWebRequest request, SMSCode validateCode) throws ServletRequestBindingException {
-        String phoneNumberParameterName = "";
+        String phoneNumberParameterName = SAAConstants.DEFAULT_PHONENUMBER_PARAMETER_NAME;
         String phoneNumber = ServletRequestUtils.getRequiredStringParameter(request.getRequest(),phoneNumberParameterName);
         smsCodeSender.send(phoneNumber,validateCode.getCode());
     }
