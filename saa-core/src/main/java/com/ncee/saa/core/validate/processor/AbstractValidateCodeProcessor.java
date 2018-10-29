@@ -45,11 +45,13 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
             throw new ValidateCodeException("Validate code can not be null.");
         }
         if(validateCodeStored.isExpired()){
+            validateCodeRepository.remove(request,validateCodeType);
             throw new ValidateCodeException("Validate code expired.");
         }
         if(!StringUtils.equalsIgnoreCase(codeInRequest,validateCodeStored.getCode())){
             throw new ValidateCodeException("Validate code does not match.");
         }
+        validateCodeRepository.remove(request,validateCodeType);
         return true;
     }
     private ValidateCodeType getValidateCodeType(ServletWebRequest request){

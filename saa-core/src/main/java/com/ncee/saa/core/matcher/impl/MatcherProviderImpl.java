@@ -23,9 +23,9 @@ public class MatcherProviderImpl implements MatcherProvider, ApplicationContextA
     public void configMatcher(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
 
         config.antMatchers(saaProperties.getBrowser().getLoginPage(),
-                "/validate/code/*",
-                applicationContext.getServletContext().getContextPath() + SAAConstants.VALIDATE_CODE_IMAGE_URL,
-                applicationContext.getServletContext().getContextPath() + SAAConstants.VALIDATE_CODE_SMS_URL,
+                SAAConstants.AUTHENTICATION_URL,
+                SAAConstants.VALIDATE_CODE_IMAGE_URL,
+                SAAConstants.VALIDATE_CODE_SMS_URL,
                 saaProperties.getBrowser().getLoginProcessingUrl()).permitAll();
     }
 

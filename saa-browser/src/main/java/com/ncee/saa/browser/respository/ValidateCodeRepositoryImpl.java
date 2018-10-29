@@ -11,7 +11,7 @@ import org.springframework.web.context.request.ServletWebRequest;
  * TODO: idle now
  */
 public class ValidateCodeRepositoryImpl implements ValidateCodeRepository {
-    private String SESSION_KEY_PREFIX = "VALIDATE_CODE_SESSION_KEY_";
+    private String SESSION_KEY_PREFIX = "SESSION_KEY_CODE_";
     private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
 
     @Override
