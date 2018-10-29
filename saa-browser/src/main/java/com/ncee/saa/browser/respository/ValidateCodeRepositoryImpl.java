@@ -6,6 +6,10 @@ import com.ncee.saa.core.validate.respository.ValidateCodeRepository;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
 import org.springframework.web.context.request.ServletWebRequest;
+
+/**
+ * TODO: idle now
+ */
 public class ValidateCodeRepositoryImpl implements ValidateCodeRepository {
     private String SESSION_KEY_PREFIX = "VALIDATE_CODE_SESSION_KEY_";
     private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
