@@ -20,8 +20,10 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
     private SAAProperties saaProperties;
     @Override
     public ValidateCode generate(ServletWebRequest request) {
-        Integer width = ServletRequestUtils.getIntParameter(request.getRequest(), "width", this.saaProperties.getValidateCode().getImageCode().getWidth());
-        Integer height = ServletRequestUtils.getIntParameter(request.getRequest(),"height",this.saaProperties.getValidateCode().getImageCode().getHeight());
+        Integer configWidth = this.saaProperties.getValidateCode().getImageCode().getWidth();
+        Integer configHeight = this.saaProperties.getValidateCode().getImageCode().getHeight();
+        Integer width = ServletRequestUtils.getIntParameter(request.getRequest(), "width", configWidth);
+        Integer height = ServletRequestUtils.getIntParameter(request.getRequest(),"height",configHeight);
         Integer expiredInSeconds = this.saaProperties.getValidateCode().getImageCode().getExpiredInSeconds();
         String code = RandomStringUtils.randomNumeric(this.saaProperties.getValidateCode().getImageCode().getLength());
 

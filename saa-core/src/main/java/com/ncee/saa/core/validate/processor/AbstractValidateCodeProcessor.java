@@ -58,7 +58,7 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
     }
     private T create(ServletWebRequest request) {
         ValidateCodeType validateCodeType = this.getValidateCodeType(request);
-        ValidateCodeGenerator validateCodeGenerator = validateCodeGeneratorMap.get(validateCodeType + "CodeGenerator");
+        ValidateCodeGenerator validateCodeGenerator = validateCodeGeneratorMap.get(validateCodeType.toString().toLowerCase() + "CodeGenerator");
         if(validateCodeGenerator == null){
             throw new ValidateCodeException("Validate code generator doesn't exist.");
         }

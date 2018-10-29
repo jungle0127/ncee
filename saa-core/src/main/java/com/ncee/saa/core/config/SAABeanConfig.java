@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
+@EnableConfigurationProperties(SAAProperties.class)
 public class SAABeanConfig {
     @Bean
     @ConditionalOnMissingBean(PasswordEncoder.class)

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
-@Component("SMSCodeProcessor")
+@Component("smsValidateCodeProcessor")
 public class SMSValidateCodeProcessor extends AbstractValidateCodeProcessor<SMSCode> {
     @Autowired
     private SMSCodeSender smsCodeSender;

@@ -1,8 +1,8 @@
 package com.ncee.saa.core.properties.validatecode;
 
 public class ValidateCodeProperties {
-    private SMSCodeProperties smsCode;
-    private ImageCodeProperties imageCode;
+    private SMSCodeProperties smsCode = new SMSCodeProperties();
+    private ImageCodeProperties imageCode = new ImageCodeProperties();
 
     public SMSCodeProperties getSmsCode() {
         return smsCode;
