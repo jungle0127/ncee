@@ -1,9 +1,11 @@
 package com.ncee.saa.browser.config;
 
 import com.ncee.saa.core.config.BasicAuthenticationConfigure;
+import com.ncee.saa.core.config.SMSCodeAuthenticationSecurityConfig;
 import com.ncee.saa.core.matcher.MatcherManager;
 import com.ncee.saa.core.properties.SAAProperties;
 import com.ncee.saa.core.validate.filter.ImageCodeFilter;
+import com.ncee.saa.core.validate.filter.SMSCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,16 +26,21 @@ public class SAABrowserConfig extends WebSecurityConfigurerAdapter {
     private MatcherManager matcherManager;
     @Autowired
     private PersistentTokenRepository persistentTokenRepository;
+    @Autowired
+    private SMSCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         basicAuthenticationConfigure.configure(http);
         matcherManager.configMatcher(http.authorizeRequests());
-        http.addFilterBefore(new ImageCodeFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new ImageCodeFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new SMSCodeFilter(),UsernamePasswordAuthenticationFilter.class);
+
         http.rememberMe()
                 .tokenRepository(persistentTokenRepository)
                 .tokenValiditySeconds(saaProperties.getBrowser().getRememberMeSeconds())
                 .userDetailsService(userDetailsService);
         http.authorizeRequests().anyRequest().authenticated()
                 .and().csrf().disable();
+        http.apply(smsCodeAuthenticationSecurityConfig);
     }
 }
