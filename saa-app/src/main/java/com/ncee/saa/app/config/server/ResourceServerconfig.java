@@ -4,11 +4,14 @@ import com.ncee.saa.core.config.BasicAuthenticationConfigure;
 import com.ncee.saa.core.config.SMSCodeAuthenticationSecurityConfig;
 import com.ncee.saa.core.properties.SAAConstants;
 import com.ncee.saa.core.properties.SAAProperties;
+import com.ncee.saa.core.validate.filter.ImageCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 @Configuration
 @EnableResourceServer
 public class ResourceServerconfig extends ResourceServerConfigurerAdapter {
@@ -18,7 +21,6 @@ public class ResourceServerconfig extends ResourceServerConfigurerAdapter {
     private SMSCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
     @Autowired
     private SAAProperties saaProperties;
-
     @Override
     public void configure(HttpSecurity http) throws Exception {
         basicAuthenticationConfigure.configure(http);

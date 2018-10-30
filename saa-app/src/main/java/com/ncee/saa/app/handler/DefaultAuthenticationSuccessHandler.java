@@ -56,7 +56,10 @@ public class DefaultAuthenticationSuccessHandler extends SimpleUrlAuthentication
         TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP,clientId,clientDetails.getScope(),"custom");
         OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
         OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request,authentication);
-        OAuth2AccessToken oAuth2AccessToken = authorizationServerTokenServices.createAccessToken(oAuth2Authentication);
+        OAuth2AccessToken oAuth2AccessToken = authorizationServerTokenServices.getAccessToken(oAuth2Authentication);
+        if(oAuth2AccessToken == null){
+            oAuth2AccessToken = authorizationServerTokenServices.createAccessToken(oAuth2Authentication);
+        }
 
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(oAuth2AccessToken));

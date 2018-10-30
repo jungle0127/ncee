@@ -23,6 +23,15 @@ ncee:
     enable: true
   saa:
     contextPath: /ncee
+    oauth2:
+      token:
+        storeType: jwt
+        jwtSigningKey: qpewiurqpweoirupqrpzmnvcnbvmnvbmnbvbcbvxcbvcxvbcxnbcvnbv
+      client[0]:
+        clientId: ncee
+        clientSecret: secret
+        accessTokenValiditySeconds: 7200
+
     browser:
       loginPage: /default-sms-code-sign-in.html
       loginProcessingUrl: /authentication/form
