@@ -33,6 +33,7 @@ create table persistent_logins (
 --
 -- users table
 --
+/*
 CREATE TABLE users(
   username VARCHAR(64) not null,
   password varchar(64) not null,
@@ -67,6 +68,7 @@ create table group_members (
   group_id bigint not null,
   constraint fk_group_members_group foreign key(group_id) references groups(id)
 );
+*/
 -- -------------------------------------------------------------------------
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
