@@ -16,3 +16,7 @@ IDEA do NOT include XML files in src directory, add configuration in pom.xml
             </resource>
         </resources>
 </build>
+
+# Swagger document
+http://www.leftso.com/blog/393.html
+http://www.leftso.com/blog/223.html
