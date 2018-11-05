@@ -70,8 +70,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     }
 
+    /**
+     * Tokenkey access expression configuration
+     * @param security
+     * @throws Exception
+     */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        super.configure(security);
+        security.tokenKeyAccess("permitAll()");
     }
 }
