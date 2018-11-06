@@ -16,6 +16,7 @@
         <java.version>1.8</java.version>
         <maven.compiler.plugin>3.6.1</maven.compiler.plugin>
         <swagger.version>2.8.0</swagger.version>
+        <validate.version>1.6</validate.version>
     </properties>
 
     <dependencies>
@@ -32,6 +33,12 @@
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
         </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>${validate.version}</version>
+        </dependency>
+
         <!-- Swagger Assistance -->
         <dependency>
             <groupId>io.springfox</groupId>

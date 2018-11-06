@@ -85,13 +85,14 @@ CREATE TABLE `users` (
 `id` bigint(20) auto_increment,
 `username` varchar(40) NOT NULL,
 `password` varchar(60) NOT NULL,
+`phone_number` char(30) NOT NULL,
 `roleid` bigint(20) NOT NULL,
 `active` int DEFAULT 1,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE users ADD CONSTRAINT FK_user_role FOREIGN KEY (roleid) REFERENCES user_role(id);
-INSERT INTO users(username,password,roleid) VALUES ('ps','$2a$10$yqoq0rusGCdo0wfXCi3CKetQN8ayJUlFeXySxrIy5QdutrfdWmhNm',1);
+INSERT INTO users(username,password,phone_number,roleid) VALUES ('ps','$2a$10$yqoq0rusGCdo0wfXCi3CKetQN8ayJUlFeXySxrIy5QdutrfdWmhNm','18088888888',1);
 -- usr: ps pwd: lotus
 
 DROP TABLE IF EXISTS `rights`;

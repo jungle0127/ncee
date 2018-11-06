@@ -1,13 +1,13 @@
 package com.ncee.dao.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class Users {
     private Long id;
 
     private String username;
-    @JsonIgnore
+
     private String password;
+
+    private String phoneNumber;
 
     private Long roleid;
 
@@ -35,6 +35,14 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
     }
 
     public Long getRoleid() {

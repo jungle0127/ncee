@@ -86,4 +86,89 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <resultMap id="BaseResultMap" type="com.ncee.dao.model.KnowledgeInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="year_id" jdbcType="BIGINT" property="yearId" />
+    <result column="province_id" jdbcType="BIGINT" property="provinceId" />
+    <result column="module_id" jdbcType="BIGINT" property="moduleId" />
+    <result column="level_id" jdbcType="BIGINT" property="levelId" />
+    <result column="knowledge_id" jdbcType="BIGINT" property="knowledgeId" />
+    <result column="active" jdbcType="INTEGER" property="active" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, year_id, province_id, module_id, level_id, knowledge_id, active
+  </sql>
+  <insert id="insertSelective" parameterType="com.ncee.dao.model.KnowledgeInfo">
+    insert into knowledge_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="yearId != null">
+        year_id,
+      </if>
+      <if test="provinceId != null">
+        province_id,
+      </if>
+      <if test="moduleId != null">
+        module_id,
+      </if>
+      <if test="levelId != null">
+        level_id,
+      </if>
+      <if test="knowledgeId != null">
+        knowledge_id,
+      </if>
+      <if test="active != null">
+        active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="yearId != null">
+        #{yearId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="moduleId != null">
+        #{moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="levelId != null">
+        #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="knowledgeId != null">
+        #{knowledgeId,jdbcType=BIGINT},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ncee.dao.model.KnowledgeInfo">
+    update knowledge_info
+    <set>
+      <if test="yearId != null">
+        year_id = #{yearId,jdbcType=BIGINT},
+      </if>
+      <if test="provinceId != null">
+        province_id = #{provinceId,jdbcType=BIGINT},
+      </if>
+      <if test="moduleId != null">
+        module_id = #{moduleId,jdbcType=BIGINT},
+      </if>
+      <if test="levelId != null">
+        level_id = #{levelId,jdbcType=BIGINT},
+      </if>
+      <if test="knowledgeId != null">
+        knowledge_id = #{knowledgeId,jdbcType=BIGINT},
+      </if>
+      <if test="active != null">
+        active = #{active,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
 </mapper>

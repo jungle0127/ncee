@@ -1,14 +1,11 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.KnowledgeLevel;
-import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.type.JdbcType;
 
 public interface KnowledgeLevelMapper {
     @Delete({
@@ -25,33 +22,18 @@ public interface KnowledgeLevelMapper {
     })
     int insert(KnowledgeLevel record);
 
+    int insertSelective(KnowledgeLevel record);
+
     @Select({
         "select",
         "id, level, description, active",
         "from knowledge_level",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="level", property="level", jdbcType=JdbcType.VARCHAR),
-        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
+    @ResultMap("com.ncee.dao.domain.KnowledgeLevelMapper.BaseResultMap")
     KnowledgeLevel selectByPrimaryKey(Long id);
 
-    @Select({
-        "select",
-        "id, level, description, active",
-        "from knowledge_level",
-        "order by id desc"
-    })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="level", property="level", jdbcType=JdbcType.VARCHAR),
-        @Result(column="description", property="description", jdbcType=JdbcType.VARCHAR),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
-    List<KnowledgeLevel> selectAll();
+    int updateByPrimaryKeySelective(KnowledgeLevel record);
 
     @Update({
         "update knowledge_level",

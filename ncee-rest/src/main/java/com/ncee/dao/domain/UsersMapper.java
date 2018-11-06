@@ -1,14 +1,11 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.Users;
-import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.type.JdbcType;
 
 public interface UsersMapper {
     @Delete({
@@ -19,78 +16,32 @@ public interface UsersMapper {
 
     @Insert({
         "insert into users (id, username, ",
-        "password, roleid, ",
-        "active)",
+        "password, phone_number, ",
+        "roleid, active)",
         "values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, ",
-        "#{password,jdbcType=VARCHAR}, #{roleid,jdbcType=BIGINT}, ",
-        "#{active,jdbcType=INTEGER})"
+        "#{password,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=CHAR}, ",
+        "#{roleid,jdbcType=BIGINT}, #{active,jdbcType=INTEGER})"
     })
     int insert(Users record);
 
+    int insertSelective(Users record);
+
     @Select({
         "select",
-        "id, username, password, roleid, active",
+        "id, username, password, phone_number, roleid, active",
         "from users",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
-        @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
-        @Result(column="roleid", property="roleid", jdbcType=JdbcType.BIGINT),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
+    @ResultMap("com.ncee.dao.domain.UsersMapper.BaseResultMap")
     Users selectByPrimaryKey(Long id);
-    @Select({
-    	"select",
-        "id, username, password, roleid, active",
-        "from users",
-        "where username = #{loginName,jdbcType=VARCHAR}"
-    })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
-        @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
-        @Result(column="roleid", property="roleid", jdbcType=JdbcType.BIGINT),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
-    Users selectByLoginName(String loginName) ;
-    
-    @Select({
-        "select",
-        "id, username, password, roleid, active",
-        "from users",
-        "order by id desc"
-    })
-    @Results({
-        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
-        @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
-        @Result(column="roleid", property="roleid", jdbcType=JdbcType.BIGINT),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
-    List<Users> selectAll();
-    
-    @Select({
-    	"select",
-        "id, username, password, roleid, active",
-        "from users",
-        "where username = #{username,jdbcType=VARCHAR}",
-        "AND password = #{password, jdbcType=VARCHAR}"
-    })
-    @Results({
-    	@Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="username", property="username", jdbcType=JdbcType.VARCHAR),
-        @Result(column="password", property="password", jdbcType=JdbcType.VARCHAR),
-        @Result(column="roleid", property="roleid", jdbcType=JdbcType.BIGINT),
-        @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
-    })
-    Users selectByLogin(Users pojo);
-    
+
+    int updateByPrimaryKeySelective(Users record);
+
     @Update({
         "update users",
         "set username = #{username,jdbcType=VARCHAR},",
           "password = #{password,jdbcType=VARCHAR},",
+          "phone_number = #{phoneNumber,jdbcType=CHAR},",
           "roleid = #{roleid,jdbcType=BIGINT},",
           "active = #{active,jdbcType=INTEGER}",
         "where id = #{id,jdbcType=BIGINT}"
