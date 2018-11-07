@@ -79,21 +79,23 @@ PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO user_role(role_name) values('admin');
+INSERT INTO user_role(role_name) VALUES('teacher');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
 `id` bigint(20) auto_increment,
-`username` varchar(40) NOT NULL,
+`username` varchar(40) NOT NULL UNIQUE,
 `password` varchar(60) NOT NULL,
-`phone_number` char(30) NOT NULL,
+`phone_number` char(30) NOT NULL UNIQUE,
 `roleid` bigint(20) NOT NULL,
 `active` int DEFAULT 1,
 PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE users ADD CONSTRAINT FK_user_role FOREIGN KEY (roleid) REFERENCES user_role(id);
-INSERT INTO users(username,password,phone_number,roleid) VALUES ('ps','$2a$10$yqoq0rusGCdo0wfXCi3CKetQN8ayJUlFeXySxrIy5QdutrfdWmhNm','18088888888',1);
+INSERT INTO users(username,password,phone_number,roleid) VALUES ('admin','$2a$10$yqoq0rusGCdo0wfXCi3CKetQN8ayJUlFeXySxrIy5QdutrfdWmhNm','18088888888',1);
 -- usr: ps pwd: lotus
+INSERT INTO users(username,password,phone_number,roleid) VALUES ('ps','$2a$10$yqoq0rusGCdo0wfXCi3CKetQN8ayJUlFeXySxrIy5QdutrfdWmhNm','18088888888',2);
 
 DROP TABLE IF EXISTS `rights`;
 CREATE TABLE `rights` (
