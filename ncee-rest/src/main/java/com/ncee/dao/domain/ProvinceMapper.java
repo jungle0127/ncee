@@ -1,11 +1,10 @@
 package com.ncee.dao.domain;
 
 import com.ncee.dao.model.Province;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.JdbcType;
+
+import java.util.List;
 
 public interface ProvinceMapper {
     @Delete({
@@ -42,4 +41,17 @@ public interface ProvinceMapper {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(Province record);
+
+    @Select({
+            "select",
+            "id, province, active",
+            "from province",
+            "order by id desc"
+    })
+    @Results({
+            @Result(column="id", property="id", jdbcType= JdbcType.BIGINT, id=true),
+            @Result(column="province", property="province", jdbcType=JdbcType.VARCHAR),
+            @Result(column="active", property="active", jdbcType=JdbcType.INTEGER)
+    })
+    List<Province> selectAll();
 }
