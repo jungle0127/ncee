@@ -1,0 +1,38 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <img width="300" alt="Logo" src="../images/cyprinoid.png">
+
+  <form action="/ncee/authentication/form" method="post">
+    <table border="1" cellpadding="3" cellspacing="0" style="width: 25%;margin:auto">
+      <tr align="left">
+        <td>用户名</td>
+        <td><input type="text" name="username"></td>
+      </tr>
+      <tr align="left">
+        <td>密码</td>
+        <td><input type="password" name="password"></td>
+      </tr>
+      <tr align="left">
+        <td>验证码</td>
+        <td>
+          <input type="text" name="imageCode">
+          <img alt="image code" src="/ncee/validate/code/image?width=67">
+        </td>
+      </tr>
+      <tr align="left">
+        <td colspan="2">
+          <button type="submit">登录</button>
+          <input name="remember-me" type="checkbox" value="true" />记住我
+        </td>
+      </tr>
+    </table>
+  </form>
+
+</div>
+
+
+
+<router-outlet></router-outlet>
