@@ -36,8 +36,7 @@ public class SAABrowserConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         basicAuthenticationConfigure.configure(http);
         matcherManager.configMatcher(http.authorizeRequests());
-        http.addFilterBefore(imageCodeFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(imageCodeFilter,UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(imageCodeFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.rememberMe()
                 .tokenRepository(persistentTokenRepository)
