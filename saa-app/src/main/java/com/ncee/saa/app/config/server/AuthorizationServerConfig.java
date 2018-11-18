@@ -36,18 +36,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private TokenEnhancer jwtTokenEnhancer;
     @Autowired
     private JwtAccessTokenConverter jwtAccessTokenConverter;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         InMemoryClientDetailsServiceBuilder clientDetailsServiceBuilder = clients.inMemory();
         OAuth2ClientProperties[] clientConfigArray = saaProperties.getOauth2().getClient();
-        if(ArrayUtils.isNotEmpty(clientConfigArray)){
-            for(OAuth2ClientProperties clientConfig: clientConfigArray){
+        if (ArrayUtils.isNotEmpty(clientConfigArray)) {
+            for (OAuth2ClientProperties clientConfig : clientConfigArray) {
                 clientDetailsServiceBuilder.withClient(clientConfig.getClientId())
                         .secret(clientConfig.getClientSecret())
                         .accessTokenValiditySeconds(clientConfig.getAccessTokenValiditySeconds())
-                        .refreshTokenValiditySeconds(360000)
-                        .authorizedGrantTypes("refresh_token","password")
-                        .scopes("all","read","write");
+                        .refreshTokenValiditySeconds(5184000)
+                        .authorizedGrantTypes("refresh_token", "password", "authorization_code")
+                        .scopes("all", "read", "write");
             }
         }
     }
@@ -72,6 +73,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     /**
      * Tokenkey access expression configuration
+     *
      * @param security
      * @throws Exception
      */

@@ -34,7 +34,7 @@ ncee:
 
     browser:
       loginPage: /default-sms-code-sign-in.html
-      loginProcessingUrl: /authentication/form
+      loginProcessingUrl: /authentication/sms
       loginType: REDIRECT
     validateCode:
       sms:

@@ -104,5 +104,6 @@
         <module>saa-app</module>
         <module>saa-browser</module>
         <module>ncee-autoconfigure</module>
+        <module>saa-token</module>
     </modules>
 </project>

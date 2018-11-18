@@ -17,6 +17,7 @@ public class BasicAuthenticationConfigure {
     @Autowired
     private AuthenticationFailureHandler authenticationFailureHandler;
     public void configure(HttpSecurity http) throws Exception {
+//        http.httpBasic().configure(http);
         http.formLogin()
                 .successHandler(authenticationSuccessHandler)
                 .failureHandler(authenticationFailureHandler)
