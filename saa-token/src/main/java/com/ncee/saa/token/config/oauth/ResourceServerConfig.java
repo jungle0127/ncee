@@ -39,7 +39,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                         SAAConstants.AUTHENTICATION_URL,
                         SAAConstants.DEFAULT_FORM_SIGN_IN_PROCESSING_URL,
                         SAAConstants.DEFAULT_SMS_SIGN_IN_PROCESSING_URL,
-                        SAAConstants.OAUTH_TOKEN,
                         saaProperties.getBrowser().getLoginProcessingUrl(),
                         saaProperties.getBrowser().getLoginPage())
                 .permitAll()
