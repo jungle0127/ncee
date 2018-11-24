@@ -3,7 +3,6 @@ package com.ncee.saa.browser.controller;
 import com.ncee.saa.core.properties.SAAConstants;
 import com.ncee.saa.core.properties.SAAProperties;
 import com.ncee.saa.core.support.RestResponse;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +27,15 @@ public class BrowserAuthController {
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
     @Autowired
     private SAAProperties saaProperties;
+
     @RequestMapping(SAAConstants.AUTHENTICATION_URL)
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public RestResponse<String> authenticate(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        SavedRequest savedRequest = requestCache.getRequest(request,response);
-        if(savedRequest != null){
+        SavedRequest savedRequest = requestCache.getRequest(request, response);
+        if (savedRequest != null) {
             String targetUrl = savedRequest.getRedirectUrl();
-            logger.info(String.format("target url %s",targetUrl));
-            if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
-                redirectStrategy.sendRedirect(request, response, saaProperties.getBrowser().getLoginPage());
-            }
+            logger.info(String.format("target url %s", targetUrl));
+            redirectStrategy.sendRedirect(request, response, saaProperties.getBrowser().getLoginPage());
         }
         return new RestResponse<String>("The resource needs authentication, please redirect to login page.");
     }
