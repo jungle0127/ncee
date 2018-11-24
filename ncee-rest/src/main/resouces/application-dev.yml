@@ -33,8 +33,8 @@ ncee:
         accessTokenValiditySeconds: 7200
 
     browser:
-      loginPage: /default-sms-code-sign-in.html
-      loginProcessingUrl: /authentication/sms
+      loginPage: /default-image-code-sign-in.html
+      loginProcessingUrl: /authentication/form
       loginType: REDIRECT
     validateCode:
       sms:
