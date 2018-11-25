@@ -1,6 +1,7 @@
 package com.ncee.service.auth;
 
 import com.ncee.dao.model.Users;
+import com.ncee.dao.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -12,10 +13,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class NCEEUserDetailsService implements UserDetailsService {
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users userPojo = userService.getUserByUserName(username);
+        Users userPojo = userRepository.findUserByUserName(username);
         if(userPojo == null){
             throw  new UsernameNotFoundException(String.format("Can not find the user with user name:%s",userPojo.getUsername()));
         }

@@ -5,16 +5,17 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class User {
-    @NotNull
+    @NotNull(message = "user name can not be null.")
     private String userName;
-    @NotNull
+    @NotNull(message = "password can not be null")
     private String password;
-    @Pattern(regexp = "((^(13|15|18)[0-9]{9}$)|(^0[1,2]{1}\\d{1}-?\\d{8}$)|(^0[3-9] {1}\\d{2}-?\\d{7,8}$)|(^0[1,2]{1}\\d{1}-?\\d{8}-(\\d{1,4})$)|(^0[3-9]{1}\\d{2}-? \\d{7,8}-(\\d{1,4})$))")
+    @Pattern(message = "Phone number is invalid.",
+            regexp = "((^(13|15|18)[0-9]{9}$)|(^0[1,2]{1}\\d{1}-?\\d{8}$)|(^0[3-9] {1}\\d{2}-?\\d{7,8}$)|(^0[1,2]{1}\\d{1}-?\\d{8}-(\\d{1,4})$)|(^0[3-9]{1}\\d{2}-? \\d{7,8}-(\\d{1,4})$))")
     private String phoneNumber;
-    @Email
+    @Email(message = "Email address is invalid.")
     private String emailAddress;
-    @NotNull
-    private String roleId;
+    @NotNull(message = "RoleId can not be null.")
+    private Long roleId;
 
     public String getUserName() {
         return userName;
@@ -48,11 +49,11 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-    public String getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 

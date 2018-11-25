@@ -238,6 +238,10 @@ INSERT INTO year(year) VALUES('2011');
 INSERT INTO year(year) VALUES('2012');
 INSERT INTO year(year) VALUES('2013');
 INSERT INTO year(year) VALUES('2014');
+INSERT INTO year(year) VALUES('2015');
+INSERT INTO year(year) VALUES('2016');
+INSERT INTO year(year) VALUES('2017');
+INSERT INTO year(year) VALUES('2018');
 
 --
 -- Table difficulty_type 
