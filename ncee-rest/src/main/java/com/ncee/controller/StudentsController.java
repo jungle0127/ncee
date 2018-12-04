@@ -24,12 +24,21 @@ import java.util.concurrent.Executors;
 public class StudentsController {
     private UserService userService;
     private ConcurrentLinkedDeque<DeferredResult<RestResponse<Boolean>>> deferredResults = new ConcurrentLinkedDeque<>();
+
     @Autowired
-    public StudentsController(UserService userService){
+    public StudentsController(UserService userService) {
         this.userService = userService;
     }
+
+    /**
+     * Asynchronized interface, refer: https://www.jianshu.com/p/acd4bbd83314
+     *
+     * @param user
+     * @param bindingResult
+     * @return
+     */
     @PostMapping("/user")
-    public DeferredResult<RestResponse<Boolean>> addUser(@Valid @RequestBody  User user, BindingResult bindingResult){
+    public DeferredResult<RestResponse<Boolean>> addUser(@Valid @RequestBody User user, BindingResult bindingResult) {
         final DeferredResult<RestResponse<Boolean>> deferredResult = new DeferredResult<>();
         deferredResults.add(deferredResult);
 
