@@ -3,13 +3,13 @@ package com.ncee.saa.token.handler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ncee.saa.core.properties.SAAConstants;
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.security.oauth2.provider.*;
@@ -26,13 +26,22 @@ import java.util.Base64;
 @Component("authenticationSuccessHandler")
 public class TokenAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    @Autowired
     private ObjectMapper objectMapper;
-    @Autowired
     private ClientDetailsService clientDetailsService;
-    @Qualifier("defaultAuthorizationServerTokenServices")
-    @Autowired
     private AuthorizationServerTokenServices authorizationServerTokenServices;
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public TokenAuthenticationSuccessHandler(ObjectMapper objectMapper,
+                                             ClientDetailsService clientDetailsService,
+                                             @Qualifier("defaultAuthorizationServerTokenServices")
+                                                     AuthorizationServerTokenServices authorizationServerTokenServices,
+                                             PasswordEncoder passwordEncoder) {
+        this.objectMapper = objectMapper;
+        this.clientDetailsService = clientDetailsService;
+        this.authorizationServerTokenServices = authorizationServerTokenServices;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -53,7 +62,7 @@ public class TokenAuthenticationSuccessHandler extends SimpleUrlAuthenticationSu
         ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
         if (clientDetails == null) {
             throw new UnapprovedClientAuthenticationException(String.format("Client information for clientId:%s does not exist.", clientId));
-        } else if (!StringUtils.equals(clientSecret, clientDetails.getClientSecret())) {
+        } else if (!this.passwordEncoder.matches(clientSecret, clientDetails.getClientSecret())) {
             throw new UnapprovedClientAuthenticationException("Client secret is invalid.");
         }
         TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP, clientId, clientDetails.getScope(), "custom");
