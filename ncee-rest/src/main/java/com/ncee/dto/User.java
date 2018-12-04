@@ -1,12 +1,16 @@
 package com.ncee.dto;
 
+import com.ncee.validator.StringMax;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class User {
+    @StringMax(max = 40,message = "length of user name can not extends 40")
     @NotNull(message = "user name can not be null.")
     private String userName;
+    @StringMax(max = 16, message = "password is too long")
     @NotNull(message = "password can not be null")
     private String password;
     @Pattern(message = "Phone number is invalid.",
