@@ -22,3 +22,9 @@ https://ng-bootstrap.github.io/#/getting-started
 
 ## 流量统计
 https://www.cnblogs.com/wuchaodzxx/p/7172321.html?utm_source=itdadao&utm_medium=referral
+
+## Spring Security & Oauth2
+https://segmentfault.com/a/1190000012260914
+
+    WebSecurityConfigurerAdapter用于保护oauth相关的endpoints，同时主要作用于用户的登录(form login,Basic auth)
+    ResourceServerConfigurerAdapter用于保护oauth要开放的资源，同时主要作用于client端以及token的认证(Bearer auth)

@@ -9,17 +9,51 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import javax.validation.Valid;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+/**
+ * @author ps
+ */
 @RestController
 @RequestMapping("/users")
 public class StudentsController {
-    @Autowired
     private UserService userService;
+    private ConcurrentLinkedDeque<DeferredResult<RestResponse<Boolean>>> deferredResults = new ConcurrentLinkedDeque<>();
+    @Autowired
+    public StudentsController(UserService userService){
+        this.userService = userService;
+    }
     @PostMapping("/user")
-    public RestResponse<Boolean> addUser(@Valid @RequestBody  User user, BindingResult bindingResult){
+    public DeferredResult<RestResponse<Boolean>> addUser(@Valid @RequestBody  User user, BindingResult bindingResult){
+        final DeferredResult<RestResponse<Boolean>> deferredResult = new DeferredResult<>();
+        deferredResults.add(deferredResult);
 
-        return new RestResponse<>(false);
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                Boolean result = userService.addUser(user);
+                deferredResult.setResult(new RestResponse<>(result));
+            }
+        });
+        deferredResult.onCompletion(new Runnable() {
+            @Override
+            public void run() {
+                deferredResults.remove(deferredResult);
+            }
+        });
+        deferredResult.onTimeout(new Runnable() {
+            @Override
+            public void run() {
+                deferredResult.setErrorResult("Time out");
+                deferredResult.setResult(new RestResponse<>(false));
+            }
+        });
+        return deferredResult;
     }
 }

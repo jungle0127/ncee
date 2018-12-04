@@ -1,0 +1,12 @@
+@PrepareForTest({SecurityUtils.class})
+
+ PowerMockito.mockStatic( SecurityUtils.class );
+ PowerMockito.when(SecurityUtils.isAnonymousApp()).thenReturn( false );
+
+版本匹配：
+ testCompile 'junit:junit:4.12'
+ testCompile 'org.mockito:mockito-core:2.8.0'
+ testCompile 'org.powermock:powermock-api-mockito2:1.7.0RC2'
+ testCompile 'org.powermock:powermock-module-junit4:1.7.0'
+ testCompile 'org.powermock:powermock-core:1.7.0'
+ testCompile 'org.powermock:powermock-module-junit4-rule:1.7.0'
