@@ -1,0 +1,50 @@
+server:
+  session:
+    timeout: 10
+  port: 8080
+  servlet:
+    context-path: /ncee
+logging:
+  config: classpath:log/logback.cfg.xml
+
+spring:
+  datasource:
+    name: primaryDataSource
+    username: root
+    password: lotus
+    url: jdbc:mysql://10.12.4.56:3306/ncee?sessionVariables=foreign_key_checks=0&serverTimezone=CTT&useSSL=false&useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+    #close foreign key checking for unit test
+    driver-class-name: com.mysql.jdbc.Driver
+  devtools:
+    restart:
+      enabled: true
+mybatis:
+  config-location: classpath:/mybatis.cfg.xml
+ncee:
+  swagger:
+    enable: true
+  saa:
+    contextPath: /ncee
+    oauth2:
+      token:
+        storeType: jwt
+        jwtSigningKey: qpewiurqpweoirupqrpzmnvcnbvmnvbmnbvbcbvxcbvcxvbcxnbcvnbv
+      client[0]:
+        clientId: ncee
+        clientSecret: secret
+        accessTokenValiditySeconds: 7200
+
+    browser:
+      loginPage: /default-image-code-sign-in.html
+      loginProcessingUrl: /authentication/form
+      loginType: REDIRECT
+    validateCode:
+      sms:
+        length: 6
+        expiredInSeconds: 300
+      image:
+        length: 4
+        expiredInSeconds: 300
+        width: 67
+        height: 23
+

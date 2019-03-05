@@ -18,7 +18,7 @@ public class NCEEUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Users userPojo = userRepository.findUserByUserName(username);
         if(userPojo == null){
-            throw  new UsernameNotFoundException(String.format("Can not find the user with user name:%s",userPojo.getUsername()));
+            throw  new UsernameNotFoundException(String.format("Can not find the user with user name:%s",username));
         }
         return new User(username,userPojo.getPassword(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));
     }
